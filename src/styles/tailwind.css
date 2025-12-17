@@ -21,6 +21,7 @@
 }
 
 @layer base {
+  /* Intentionally left empty — use the .body-text utility for paragraph styling */
 }
 
 @layer components {
