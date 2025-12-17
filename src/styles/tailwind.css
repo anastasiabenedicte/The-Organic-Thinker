@@ -5,46 +5,57 @@
 @import "tailwindcss-animated";
 @import "tailwindcss-intersect";
 
-@font-face {
-  font-family: 'Honk';
-  src: url('/fonts/Honk-Regular-VariableFont_MORF,SHLN.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Quicksand';
-  src: url('/fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Domine';
-  src: url('/fonts/Domine-Regular.ttf') format('truetype');
-}
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 
 @theme {
-  /* Her tilføjes theme variable // tokens */
+  /* Farver */
+  --color-black: #2E2E2E;
+  --color-dark-grey: #3F3F3F;
+  --color-beige: #EFEDE8;
+  --color-white: #FFFFFF;
 
-  /*Farver */
-  --color-primary-400: #00E4F5;
-  --color-primary-500: #006269;
-  --color-primary-600: #006D75;
-  --color-secondary-400: #F5E400;
-  --color-secondary-500: #F5A600;
-  --color-secondary-600: #F57A00;
-
-  /*Typografi */
-  --font-display: 'Honk', monospace;
-  --font-sans: 'Quicksand', sans-serif;
-  --font-serif: 'Domine', serif;
+  /* Typografi */
+  --font-display: 'Montserrat', sans-serif;
+  --font-sans: 'Montserrat', sans-serif;
 }
 
 @layer base {
-
 }
 
-@layer components{
+@layer components {
+  /* h1 */
+  .h1 {
+    @apply font-sans font-normal text-[24px] leading-[1] text-[var(--color-black)];
+    @apply md:text-[64px];
+  }
 
+  /* h2 */
+  .h2 {
+    @apply font-sans font-normal text-[20px] leading-[0.9] tracking-[0.015em] text-[var(--color-black)];
+    @apply md:text-[56px];
+  }
+
+  /* h3 */
+  .h3 {
+    @apply font-sans font-medium text-[16px] leading-[1] text-[var(--color-black)];
+    @apply md:text-[36px];
+  }
+
+  /* brødtekst */
+  .body-text {
+    @apply font-sans font-normal text-[12px] leading-[1.25] tracking-[-0.015em] text-[var(--color-black)];
+    @apply md:text-[14px] md:leading-[30px];
+  }
+
+  /* brødtekst links */
+  .body-text a {
+    @apply underline underline-offset-2 decoration-[var(--color-black)];
+  }
 }
 
-@layer utilities{
-  
+@layer components {
+}
+
+@layer utilities {
 }
