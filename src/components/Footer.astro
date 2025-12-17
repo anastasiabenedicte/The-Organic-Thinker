@@ -1,7 +1,39 @@
 ---
+import Button from "../components/Button.astro";
 ---
-<footer class="bg-primary-500 text-white">
-    <div class="container mx-auto p-4">
-        <p>&copy; 2025</p>
+<footer class="border border-[var(--color-dark-grey)]">
+    <div class="container mx-auto px-6 py-6">
+        <!-- Use three columns on md+ so the subscribe form can sit in the middle column -->
+        <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-8">
+
+            <!-- Left: social links -->
+            <div class="pt-2 flex justify-center md:justify-start">
+                <ul class="flex flex-row gap-8">
+                    <li class="body-text hover:underline">Pinterest</li>
+                    <li class="body-text hover:underline">Instagram</li>
+                    <li class="body-text hover:underline">Spotify</li>
+                </ul>
+            </div>
+
+            <!-- Center: subscribe block (center column) -->
+            <div class="flex flex-col items-center justify-center">
+                <h3 class="text-xl md:text-2xl mb-6 text-center">Join the ORGANIC community to start your journey.</h3>
+
+                <form class="w-full max-w-xl text-center">
+                    <label for="email" class="sr-only">Email</label>
+                    <!-- centered: full width on mobile, narrower on md+ -->
+                    <input id="email" name="email" type="email" placeholder="Email" class="w-full md:w-80 mx-auto border border-[var(--color-dark-grey)] p-4 mb-4 focus:outline-none" />
+
+                    <div class="flex justify-center">
+                        <Button text="Subscribe" variant="filled" />
+                    </div>
+
+                    <p class="body-text text-sm mt-4">By subscribing you agree to organic's storage and handling of your data. For more information, visit our <a href="#" class="underline">Privacy Policy</a>.</p>
+                </form>
+            </div>
+
+            <!-- Right: reserved for links / empty on purpose to keep subscribe centered -->
+            <div class="hidden md:block" />
+        </div>
     </div>
 </footer>

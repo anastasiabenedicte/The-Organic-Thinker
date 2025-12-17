@@ -3,12 +3,19 @@ import Button from "../components/Button.astro";
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 ---
-<header x-data="{ open: false }" class="bg-white border-b border-[var(--color-dark-grey)] border-[0.5px]">
-  <div id="navbar" class="flex justify-between items-center w-full h-[80px] px-4">
+<header x-data="{ open: false, showBanner: true }" class="bg-white border-b border-[var(--color-dark-grey)] border-[0.5px]">
+  <!-- Announcement banner (above navbar) - black with close button -->
+  <div x-show="showBanner" x-transition class="w-full bg-black text-white">
+    <div class="container mx-auto px-4 py-2 relative">
+  <p class="body-text text-sm text-center text-white">Join the Organic Thinker's community to start your healing journey</p>
+      <button @click="showBanner = false" aria-label="Close announcement" class="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xl leading-none">×</button>
+    </div>
+  </div>
+  <div id="navbar" class="flex justify-between items-center w-full h-[64px] px-4">
     <!-- Logo -->
     <div id="logo" class="flex items-center h-full">
       <a href="/" class="transition-transform duration-200 hover:scale-105 hover:opacity-80">
-        <img src="/billeder/logo.png" alt="Logo" class="w-[75px] h-[75px]" />
+        <img src="/billeder/logo.png" alt="Logo" class="w-[56px] h-[56px]" />
       </a>
     </div>
 
