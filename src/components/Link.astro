@@ -1,6 +1,5 @@
 ---
-// Denne Link-komponent videresender kun den indkomne class-attribut.
-// For at bruge .body-text link-styling, giv <Link class="body-text"> eller brug en <a class="body-text"> direkte.
+// Link: videresender href, target og class
 const { href = "#", target = "_self" } = Astro.props;
 ---
 <a href={href} target={target} class={Astro.props.class}><slot /></a>

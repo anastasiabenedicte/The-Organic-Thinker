@@ -1,0 +1,59 @@
+---
+// HeroSection
+// - Renders the left hero image and right hero video.
+// - Keeps mobile and desktop headline overlays and the original play/pause script.
+// - Uses only Tailwind + project styles and preserves alt text.
+---
+<section class="relative grid min-h-screen w-full md:grid-cols-2">
+  <!-- Left: Image -->
+  <div class="relative h-screen w-full">
+    <img src="/billeder/hero.png" alt="Hero image" class="h-full w-full object-cover" />
+
+    <!-- Mobile headline overlay -->
+    <div class="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center md:hidden">
+      <h1 class="h2 max-w-3xl text-[var(--color-black)]">
+        An online platform that supports mental health through organic thinking
+      </h1>
+    </div>
+  </div>
+
+  <!-- Right: Video -->
+  <div class="relative h-screen w-full bg-white md:border-l md:border-[var(--color-beige)]">
+    <video id="heroVideo" src="/billeder/hero.mp4" class="h-full w-full object-cover" autoplay muted loop playsinline></video>
+
+    <!-- Pause/play overlay -->
+    <div id="heroOverlay" class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+      <div id="heroPauseIcon" class="hidden pointer-events-none text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 bg-black/40 rounded-full p-3" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M6 5v14M18 5v14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop headline -->
+  <div class="pointer-events-none absolute inset-0 hidden md:flex items-center justify-center px-6 text-center">
+    <h1 class="h2 max-w-3xl text-[var(--color-black)] md:h1">
+      An online platform that supports mental health through organic thinking
+    </h1>
+  </div>
+
+  <script type="module">
+    // preserve original play/pause behaviour
+    const video = document.getElementById('heroVideo');
+    const pauseIcon = document.getElementById('heroPauseIcon');
+
+    function updateOverlay() {
+      if (!video) return;
+      if (video.paused) pauseIcon?.classList.remove('hidden');
+      else pauseIcon?.classList.add('hidden');
+    }
+
+    if (video) {
+      video.addEventListener('click', () => { if (video.paused) video.play(); else video.pause(); updateOverlay(); });
+      video.addEventListener('play', updateOverlay);
+      video.addEventListener('pause', updateOverlay);
+      updateOverlay();
+    }
+  </script>
+</section>

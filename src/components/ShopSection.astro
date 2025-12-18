@@ -1,0 +1,25 @@
+---
+// ShopSection
+// - Renders mobile carousel and desktop grid of products using the existing `Shop` component.
+import Shop from './Shop.astro';
+---
+<section class="w-full border-[0.5px] border-[var(--color-dark-grey)] bg-white py-20">
+  <div class="mx-auto w-full max-w-5xl px-6">
+    <h3 class="h3 mb-4 text-center">Holistic shop</h3>
+    <p class="body-text mb-8 text-center text-gray-600 underline">Browse the shop</p>
+
+    <!-- Mobile carousel -->
+    <div class="md:hidden -mx-6 flex gap-6 overflow-x-auto px-6 snap-x snap-mandatory">
+      <div class="snap-center flex-shrink-0 w-[320px]"><Shop image="/billeder/hibiscus.png" title="Hibiscus" price={10} currency="€" /></div>
+      <div class="snap-center flex-shrink-0 w-[320px]"><Shop image="/billeder/rose.png" title="Rose" price={10} currency="€" /></div>
+      <div class="snap-center flex-shrink-0 w-[320px]"><Shop image="/billeder/lavender.png" title="Lavender" price={10} currency="€" /></div>
+    </div>
+
+    <!-- Desktop grid -->
+    <div class="hidden justify-items-center gap-8 md:grid md:grid-cols-3">
+      <Shop image="/billeder/hibiscus.png" title="Hibiscus" price={10} currency="€" />
+      <Shop image="/billeder/rose.png" title="Rose" price={10} currency="€" />
+      <Shop image="/billeder/lavender.png" title="Lavender" price={10} currency="€" />
+    </div>
+  </div>
+</section>
