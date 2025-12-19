@@ -17,9 +17,10 @@ const {
   <!-- Billedkolonne rendres kun på md+ -->
   {imagePosition === 'left' && (
     <div class="relative hidden h-screen w-full md:block">
+      <!-- Fallback hvis imageAlt ikke er angivet -->
       <img
         src={image}
-        alt={imageAlt || title} <!-- Fallback hvis imageAlt ikke er angivet -->
+        alt={imageAlt || title}
         class="h-full w-full object-cover"
       />
     </div>
@@ -64,6 +65,7 @@ const {
   <!-- Alternativ billedplacering via samme logik -->
   {imagePosition === 'right' && (
     <div class="relative hidden h-screen w-full md:block">
+      <!-- Fallback hvis imageAlt ikke er angivet -->
       <img
         src={image}
         alt={imageAlt || title}
