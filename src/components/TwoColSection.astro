@@ -1,45 +1,75 @@
 ---
+/* Props styrer indhold og layout uden at ændre komponentens struktur */
 const {
   title = '',
-  paragraphs = [],
+  paragraphs = [],        // Bruges til at styre tekstmængde pr. breakpoint
   image = '/billeder/hero.png',
   imageAlt = '',
-  imagePosition = 'right', // 'left' or 'right'
-  showImageMobile = false,
+  imagePosition = 'right', // Bestemmer om billedkolonne rendres før eller efter tekst
+  showImageMobile = false, // Aktiverer billede i tekstflow på mobil
   ctaText = 'Read more',
   ctaHref = '/',
 } = Astro.props;
 ---
 
 <section class="grid min-h-screen w-full border-[0.5px] border-[var(--color-dark-grey)] md:grid-cols-2">
+
+  <!-- Billedkolonne rendres kun på md+ -->
   {imagePosition === 'left' && (
     <div class="relative hidden h-screen w-full md:block">
-      <img src={image} alt={imageAlt || title} class="h-full w-full object-cover" />
+      <img
+        src={image}
+        alt={imageAlt || title} <!-- Fallback hvis imageAlt ikke er angivet -->
+        class="h-full w-full object-cover"
+      />
     </div>
   )}
 
-  <!-- Text -->
   <div class="flex items-center bg-white">
     <div class="w-full px-[100px] py-20">
-      <h2 class="h2 mb-[50px] text-center">{title}</h2>
 
+      <!-- h2 fastholder korrekt hierarki inde i siden -->
+      <h2 class="h2 mb-[50px] text-center">
+        {title}
+      </h2>
+
+      <!-- Mobil-specifikt billede -->
       {showImageMobile && (
-        <img src={image} alt={imageAlt || title} class="mx-auto mb-8 w-[320px] object-cover md:hidden" />
+        <img
+          src={image}
+          alt={imageAlt || title}
+          class="mx-auto mb-8 w-[320px] object-cover md:hidden"
+        />
       )}
 
+      <!-- Tekst vises sekventielt for kontrol over længde -->
       {paragraphs[0] && <p class="body-text mb-6 max-w-2xl">{paragraphs[0]}</p>}
       {paragraphs[1] && <p class="body-text mb-6 max-w-2xl">{paragraphs[1]}</p>}
-      {paragraphs[2] && <p class="body-text hidden max-w-2xl md:block">{paragraphs[2]}</p>}
+      {paragraphs[2] && (
+        <p class="body-text hidden max-w-2xl md:block">
+          {paragraphs[2]}
+        </p>
+      )}
 
+      <!-- CTA linkes direkte uden ekstra komponent -->
       <div class="mt-6 flex justify-center">
-        <a href={ctaHref} class="body-text inline-block underline">{ctaText}</a>
+        <a href={ctaHref} class="body-text inline-block underline">
+          {ctaText}
+        </a>
       </div>
+
     </div>
   </div>
 
+  <!-- Alternativ billedplacering via samme logik -->
   {imagePosition === 'right' && (
     <div class="relative hidden h-screen w-full md:block">
-      <img src={image} alt={imageAlt || title} class="h-full w-full object-cover" />
+      <img
+        src={image}
+        alt={imageAlt || title}
+        class="h-full w-full object-cover"
+      />
     </div>
   )}
 </section>
+

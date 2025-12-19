@@ -1,26 +1,36 @@
 ---
-// Button: knap — rendrer <a> hvis `href` er angivet
+/* Komponenten vælger automatisk <a> eller <button> baseret på om href findes */
 const { text = "Knap", href = null } = Astro.props;
 ---
 
-{/** Allow passing an extra class via component `class` attribute (e.g., 'w-full') */}
+{/** Muliggør at ekstra klasser kan tilføjes udefra (fx w-full) */}
 {href ? (
+  <!-- <a> bruges når knappen navigerer -->
   <a
     href={href}
     class={
-      `bg-white border border-black text-black rounded-[15px] px-[9px] py-[5px] gap-[7.5px] text-center flex items-center justify-center body-text md:px-[18px] md:py-[4px] md:gap-[15px] md:rounded-[30px] transition-colors duration-200 hover:bg-black hover:text-white ${Astro.props.class ?? ''}`
+      `bg-white border border-black text-black rounded-[15px]
+       px-[9px] py-[5px] gap-[7.5px]
+       text-center flex items-center justify-center body-text
+       md:px-[18px] md:py-[4px] md:gap-[15px] md:rounded-[30px]
+       transition-colors duration-200 hover:bg-black hover:text-white
+       ${Astro.props.class ?? ''}`
     }
   >
     {text}
   </a>
 ) : (
+  <!-- <button> bruges når der ikke er navigation -->
   <button
     class={
-      `bg-white border border-black text-black rounded-[15px] px-[9px] py-[5px] gap-[7.5px] text-center flex items-center justify-center body-text md:px-[18px] md:py-[4px] md:gap-[15px] md:rounded-[30px] transition-colors duration-200 hover:bg-black hover:text-white ${Astro.props.class ?? ''}`
+      `bg-white border border-black text-black rounded-[15px]
+       px-[9px] py-[5px] gap-[7.5px]
+       text-center flex items-center justify-center body-text
+       md:px-[18px] md:py-[4px] md:gap-[15px] md:rounded-[30px]
+       transition-colors duration-200 hover:bg-black hover:text-white
+       ${Astro.props.class ?? ''}`
     }
   >
     {text}
   </button>
 )}
-
-

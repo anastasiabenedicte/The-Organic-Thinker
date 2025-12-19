@@ -1,33 +1,48 @@
 ---
-// CardsSection
-// - Encapsulates the Nutrition & Activity card rows and images.
-// - Uses existing `Card.astro` for card content; preserves alt text and ordering.
+/* Wrapper-komponent der genbruger Card til flere indholdssektioner */
 import Card from './Card.astro';
 ---
 <section class="w-full">
+  <!-- Grid bruges til at styre billede/tekst-par i fast rækkefølge -->
   <div class="grid min-h-screen border-[0.5px] border-[var(--color-dark-grey)] md:grid-cols-2">
-    <img src="/billeder/nutrition.png" alt="Nutrition image" class="order-1 h-[50vh] w-full object-cover md:h-full md:order-1" />
+
+    <!-- Nutrition: billede vises først på alle breakpoints -->
+    <img
+      src="/billeder/nutrition.png"
+      alt="Nutrition image"
+      class="order-1 h-[50vh] w-full object-cover md:h-full md:order-1"
+    />
+
+    <!-- Nutrition: tekst koblet direkte til billedet -->
     <div class="order-2 flex items-center bg-white h-[50vh] md:h-auto">
       <div class="px-6 py-10 md:px-20 md:py-16 w-full">
         <Card
           title="Nutrition"
-          body="Plant‑forward guidance to nourish body and mind: simple recipes, rituals, and daily food practices. Seasonal recipes and gentle meal plans make healthy eating manageable."
+          body="Plant-forward guidance to nourish body and mind: simple recipes, rituals, and daily food practices. Seasonal recipes and gentle meal plans make healthy eating manageable."
           cta="Read →"
           href="/nutrition"
         />
       </div>
     </div>
 
-    <img src="/billeder/activity.png" alt="Activity image" class="order-3 h-[50vh] w-full object-cover md:h-full md:order-4" />
+    <!-- Activity: order ændres på desktop for at skabe variation -->
+    <img
+      src="/billeder/activity.png"
+      alt="Activity image"
+      class="order-3 h-[50vh] w-full object-cover md:h-full md:order-4"
+    />
+
+    <!-- Activity: tekst placeres før billede på desktop via order -->
     <div class="order-4 flex items-center bg-white md:order-3 h-[50vh] md:h-auto">
       <div class="px-6 py-10 md:px-20 md:py-16 w-full">
         <Card
           title="Activity"
-          body="Movement and micro‑practices to calm the nervous system, lift mood, and sharpen focus. Short, repeatable exercises—breathwork, short walks, and desk resets—that fit any day."
+          body="Movement and micro-practices to calm the nervous system, lift mood, and sharpen focus. Short, repeatable exercises—breathwork, short walks, and desk resets—that fit any day."
           cta="Read →"
           href="/activity"
         />
       </div>
     </div>
+
   </div>
 </section>

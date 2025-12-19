@@ -24,7 +24,10 @@
 }
 
 @layer base {
- 
+  /* Hide elements using Alpine's x-cloak until Alpine is initialized */
+  [x-cloak] {
+    display: none !important;
+  }
 }
 
 @layer components {
