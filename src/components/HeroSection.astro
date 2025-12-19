@@ -8,7 +8,7 @@
     <img src="/billeder/hero.png" alt="Hero image" class="h-full w-full object-cover" />
 
     <!-- Mobil: tekst overlayes billedet for at spare plads -->
-    <div class="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center md:hidden">
+    <div class="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center md:hidden z-20">
       <h1 class="h2 max-w-3xl text-[var(--color-black)]">
         An online platform that supports mental health through organic thinking
       </h1>
@@ -38,8 +38,8 @@
     </div>
   </div>
 
-  <!-- Desktop: fælles overskrift overlayes begge kolonner -->
-  <div class="pointer-events-none absolute inset-0 hidden md:flex items-center justify-center px-6 text-center">
+  <!-- Desktop: fælles overskrift overlayes begge kolonner (skjult på mobil) -->
+  <div class="pointer-events-none absolute inset-0 hidden md:flex items-center justify-center px-6 text-center z-20">
     <h1 class="h2 max-w-3xl text-[var(--color-black)] md:h1">
       An online platform that supports mental health through organic thinking
     </h1>
