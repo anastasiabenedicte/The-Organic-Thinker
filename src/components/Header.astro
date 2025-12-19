@@ -7,13 +7,14 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 ---
 
+<!-- Alpine state til mobilmenu og banner -->
 <header
-  x-data="{ open: false, showBanner: true }"  <!-- Alpine state til mobilmenu og banner -->
+  x-data="{ open: false, showBanner: true }"
   class="bg-white border-b border-[var(--color-dark-grey)] border-[0.5px]"
 >
 
   <!-- Banner kan lukkes uden page reload -->
-  <div x-show="showBanner" x-transition class="w-full bg-black text-white">
+  <div x-cloak x-show="showBanner" x-transition class="w-full bg-black text-white">
     <div class="container mx-auto px-4 py-2 relative">
       <p class="body-text text-sm text-center text-white">
         Join the Organic Thinker's community to start your healing journey
@@ -68,6 +69,7 @@ const currentPath = pathname.slice(1);
 
   <!-- Mobilmenu vises kun når open = true -->
   <div
+    x-cloak
     x-show="open"
     x-transition
     class="lg:hidden bg-white w-full h-screen overflow-hidden border-b border-[var(--color-dark-grey)] border-[0.5px]"
