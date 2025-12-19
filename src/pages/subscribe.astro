@@ -4,31 +4,75 @@ import Button from "../components/Button.astro";
 ---
 
 <MainLayout title="Subscribe">
+  <!-- Selvstændig side der starter subscribe-flowet -->
   <section class="w-full py-20">
     <div class="mx-auto max-w-2xl px-6">
-      <h1 class="h2 text-center mb-8">Subscribe to the Organic Thinker</h1>
 
-      <p class="body-text text-center mb-8">Join our mailing list for articles, stories and product updates. We respect your privacy.</p>
+      <h1 class="h2 text-center mb-8">
+        Subscribe to the Organic Thinker
+      </h1>
 
-  <form class="bg-white border-[0.5px] border-[var(--color-dark-grey)] p-8" method="get" action="/subscribe/thanks">
-        <label for="name" class="body-text block mb-2">Name</label>
-        <input id="name" name="name" type="text" placeholder="Your name" class="w-full border border-[var(--color-dark-grey)] p-3 mb-4" />
+      <p class="body-text text-center mb-8">
+        Join our mailing list for articles, stories and product updates. We respect your privacy.
+      </p>
 
-        <label for="email" class="body-text block mb-2">Email</label>
-        <input id="email" name="email" type="email" placeholder="you@example.com" required class="w-full border border-[var(--color-dark-grey)] p-3 mb-4" />
+      <!-- GET bruges, da der ikke er backend (videresender til takkeside) -->
+      <form
+        class="bg-white border-[0.5px] border-[var(--color-dark-grey)] p-8"
+        method="get"
+        action="/subscribe/thanks"
+      >
+        <label for="name" class="body-text block mb-2">
+          Name
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Your name"
+          class="w-full border border-[var(--color-dark-grey)] p-3 mb-4"
+        />
 
+        <!-- type="email" giver browser-validering -->
+        <label for="email" class="body-text block mb-2">
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="you@example.com"
+          required
+          class="w-full border border-[var(--color-dark-grey)] p-3 mb-4"
+        />
+
+        <!-- Label wrapper gør hele linjen klikbar -->
         <label class="inline-flex items-center mb-4">
-          <input type="checkbox" name="consent" class="mr-2" required />
-          <span class="body-text text-sm">I agree to receive emails and accept the privacy policy.</span>
+          <input
+            type="checkbox"
+            name="consent"
+            required
+            class="mr-2"
+          />
+          <span class="body-text text-sm">
+            I agree to receive emails and accept the privacy policy.
+          </span>
         </label>
 
         <div class="flex justify-center">
-          <!-- use site Button component for consistent style; button inside form will submit -->
-          <Button text="Subscribe" class="bg-black text-black px-6 py-3 body-text" />
+          <!-- Button-komponent bruges for ens handling -->
+          <Button
+            text="Subscribe"
+            class="bg-black text-black px-6 py-3 body-text"
+          />
         </div>
       </form>
 
-      <p class="body-text text-sm mt-6 text-center">After submitting you'll see a confirmation message (this is a demo page — backend handling isn't implemented yet).</p>
+      <!-- Forklarer hvorfor der ikke sker reel tilmelding -->
+      <p class="body-text text-sm mt-6 text-center">
+        After submitting you'll see a confirmation message (this is a demo page — backend handling isn't implemented yet).
+      </p>
+
     </div>
   </section>
 </MainLayout>

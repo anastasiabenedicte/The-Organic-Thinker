@@ -5,44 +5,43 @@ import Text from "../components/Text.astro";
 import Link from "../components/Link.astro";
 import Button from "../components/Button.astro";
 ---
-<MainLayout title="Titel">
+
+<MainLayout title="Komponentbibliotek">
   <main class="container mx-auto p-4">
 
-    <!-- H1 -->
-    <Heading htmlheading="h1" class="h1">Komponentbibliotek</Heading>
-    <Text class="body-text">Her kan du finde alle de komponenter, der er brugt i dette projekt.</Text>
+    <Heading htmlheading="h1" class="h1">
+      Komponentbibliotek
+    </Heading>
 
-    <hr class="my-4" />
+    <Text class="body-text">
+      Her kan du finde alle de komponenter, der er brugt i dette projekt.
+    </Text>
 
-    <!-- Typografi -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-      
+    <hr class="my-6" />
+
+    <!-- Sektion bruges til at samle typografi-eksempler semantisk -->
+    <section
+      aria-labelledby="typografi-heading"
+      class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"
+    >
       <div class="space-y-6">
-        <Heading htmlheading="h2" class="h2">Typografi & overskrifter</Heading>
+        <!-- aria-labelledby kobler sektionen til dens overskrift -->
+        <Heading id="typografi-heading" htmlheading="h2" class="h2">
+          Typografi & overskrifter
+        </Heading>
 
-        <Heading htmlheading="h1" class="h1">h1 - desk</Heading>
-        <Heading htmlheading="h2" class="h2">h2 - desk</Heading>
-        <Heading htmlheading="h3" class="h3">h3 - desk</Heading>
+        <Heading htmlheading="h1" class="h1">h1 – desktop</Heading>
+        <Heading htmlheading="h2" class="h2">h2 – desktop</Heading>
+        <Heading htmlheading="h3" class="h3">h3 – desktop</Heading>
 
-        <Text class="body-text">brødtekst - desk</Text>
+        <Text class="body-text">
+          brødtekst – desktop
+        </Text>
       </div>
-
     </section>
 
-    <hr class="my-4" />
+    <hr class="my-6" />
 
-    <!-- Links -->
+    <!-- Link vises via egen komponent for ens adfærd -->
     <section>
-      <Text class="body-text"><Link href="#" class="body-text a">brødtekst - link</Link></Text>
-    </section>
-
-    <hr class="my-4" />
-
-    <!-- Knap -->
-    <section>
-      <Heading htmlheading="text" class="h2">Button</Heading>
-      <Text><Button text="Subscribe" /></Text>
-    </section>
-
-  </main>
-</MainLayout>
+      <Text class

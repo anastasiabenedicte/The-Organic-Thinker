@@ -3,15 +3,30 @@ import MainLayout from "../../layouts/MainLayout.astro";
 ---
 
 <MainLayout title="Thank you for subscribing">
+  <!-- Separat side der afslutter subscribe-flowet -->
   <section class="w-full py-24">
     <div class="mx-auto max-w-2xl px-6 text-center">
-      <h1 class="h2 mb-6">You're subscribed — welcome aboard</h1>
 
-      <p class="body-text mb-4">You're on the list. Expect carefully curated, practical insights on organic approaches to mental wellbeing — delivered thoughtfully and sparingly to your inbox.</p>
+      <!-- h1 bruges fordi dette er sidens primære budskab -->
+      <h1 class="h2 mb-6">
+        You're subscribed — welcome aboard
+      </h1>
 
-      <p class="body-text text-sm text-gray-600 mb-8">If you don't see a confirmation within a few minutes, please check your spam folder or reach out via the contact page and we'll help you.</p>
+      <!-- Forklarer næste skridt efter handling -->
+      <p class="body-text mb-4">
+        You're on the list. Expect carefully curated, practical insights on organic approaches to mental wellbeing — delivered thoughtfully and sparingly to your inbox.
+      </p>
 
-      <a href="/" class="body-text underline">Return to homepage</a>
+      <!-- Hjælpetekst hvis processen fejler -->
+      <p class="body-text text-sm text-gray-600 mb-8">
+        If you don't see a confirmation within a few minutes, please check your spam folder or reach out via the contact page and we'll help you.
+      </p>
+
+      <!-- Simpel navigation tilbage til forsiden -->
+      <a href="/" class="body-text underline">
+        Return to homepage
+      </a>
+
     </div>
   </section>
 </MainLayout>

@@ -1,15 +1,13 @@
 ---
-// HeroSection
-// - Renders the left hero image and right hero video.
-// - Keeps mobile and desktop headline overlays and the original play/pause script.
-// - Uses only Tailwind + project styles and preserves alt text.
+/* Hero-sektion med statisk billede og interaktiv video */
 ---
 <section class="relative grid min-h-screen w-full md:grid-cols-2">
-  <!-- Left: Image -->
-  <div class="relative h-screen w-full">
+
+  <!-- Venstre kolonne: billede (vises nederst på mobil via order) -->
+  <div class="relative h-screen w-full order-2 md:order-1">
     <img src="/billeder/hero.png" alt="Hero image" class="h-full w-full object-cover" />
 
-    <!-- Mobile headline overlay -->
+    <!-- Mobil: tekst overlayes billedet for at spare plads -->
     <div class="pointer-events-none absolute inset-0 flex items-center justify-center px-6 text-center md:hidden">
       <h1 class="h2 max-w-3xl text-[var(--color-black)]">
         An online platform that supports mental health through organic thinking
@@ -17,21 +15,30 @@
     </div>
   </div>
 
-  <!-- Right: Video -->
-  <div class="relative h-screen w-full bg-white md:border-l md:border-[var(--color-beige)]">
-    <video id="heroVideo" src="/billeder/hero.mp4" class="h-full w-full object-cover" autoplay muted loop playsinline></video>
+  <!-- Højre kolonne: video (interaktiv) -->
+  <div class="relative h-screen w-full bg-white order-1 md:order-2 md:border-l md:border-[var(--color-beige)]">
+    <!-- Video autoplayes, men kan pauses via klik eller tastatur -->
+    <video
+      id="heroVideo"
+      src="/billeder/hero.mp4"
+      class="h-full w-full object-cover cursor-pointer"
+      autoplay
+      muted
+      loop
+      playsinline
+      tabindex="0"
+      aria-label="Hero video - tryk for at pause/afspille">
+    </video>
 
-    <!-- Pause/play overlay -->
-    <div id="heroOverlay" class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-      <div id="heroPauseIcon" class="hidden pointer-events-none text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 bg-black/40 rounded-full p-3" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M6 5v14M18 5v14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </div>
+    <!-- Pause-ikon vises kun når videoen er pauset -->
+    <div
+      id="heroPauseIcon"
+      class="absolute inset-0 z-10 hidden flex items-center justify-center pointer-events-none">
+      <img src="/billeder/pause.png" alt="Paused" class="w-20 h-20 object-contain" />
     </div>
   </div>
 
-  <!-- Desktop headline -->
+  <!-- Desktop: fælles overskrift overlayes begge kolonner -->
   <div class="pointer-events-none absolute inset-0 hidden md:flex items-center justify-center px-6 text-center">
     <h1 class="h2 max-w-3xl text-[var(--color-black)] md:h1">
       An online platform that supports mental health through organic thinking
@@ -39,21 +46,45 @@
   </div>
 
   <script type="module">
-    // preserve original play/pause behaviour
+    // Finder video-elementet én gang
     const video = document.getElementById('heroVideo');
+    if (!video) return;
+
     const pauseIcon = document.getElementById('heroPauseIcon');
 
-    function updateOverlay() {
-      if (!video) return;
-      if (video.paused) pauseIcon?.classList.remove('hidden');
-      else pauseIcon?.classList.add('hidden');
+    // Skifter mellem play og pause
+    function togglePlayback() {
+      if (video.paused) video.play();
+      else video.pause();
     }
 
-    if (video) {
-      video.addEventListener('click', () => { if (video.paused) video.play(); else video.pause(); updateOverlay(); });
-      video.addEventListener('play', updateOverlay);
-      video.addEventListener('pause', updateOverlay);
-      updateOverlay();
+    // Synkroniserer pause-ikon med videoens tilstand
+    function updatePauseIcon() {
+      if (!pauseIcon) return;
+      pauseIcon.classList.toggle('hidden', !video.paused);
     }
+
+    // Klik understøtter pause/play
+    video.addEventListener('click', () => {
+      togglePlayback();
+      updatePauseIcon();
+    });
+
+    // Tastatur (Space / Enter) for tilgængelighed
+    video.addEventListener('keydown', (e) => {
+      if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
+        e.preventDefault();
+        togglePlayback();
+        updatePauseIcon();
+      }
+    });
+
+    // Holder ikon opdateret ved eksterne play/pause events
+    video.addEventListener('play', updatePauseIcon);
+    video.addEventListener('pause', updatePauseIcon);
+
+    // Initial tilstand
+    updatePauseIcon();
   </script>
+
 </section>

@@ -1,29 +1,38 @@
 ---
-// Layout: overordnet layout med header, footer og slot
+/* Layout samler header, footer og sideindhold ét sted */
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import '../styles/tailwind.css';
+import "../styles/tailwind.css";
+
 const { title } = Astro.props;
 ---
+
 <html lang="da">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
+
+    <link rel="icon" type="image/png" href="/billeder/logo.png" />
     <meta name="generator" content={Astro.generator} />
-    <title>{Astro.props.title}</title>
-    <script defer src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"></script>
+
+    <!-- Titel sættes pr. side via props -->
+    <title>{title}</title>
+
+    <!-- Bruges af tailwindcss-intersect til viewport-baserede effekter -->
+    <script
+      defer
+      src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js">
+    </script>
   </head>
+
   <body class="flex flex-col min-h-screen m-0 p-0">
-    
     <Header />
 
-    <!-- Main content fylder alt ledigt rum -->
+    <!-- flex-1 sikrer footer i bunden ved korte sider -->
     <main class="flex-1">
       <slot />
     </main>
 
     <Footer />
-      
   </body>
 </html>

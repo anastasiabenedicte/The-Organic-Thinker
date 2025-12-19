@@ -1,65 +1,92 @@
 ---
-// Header: navigation og annonce-banner
+/* Header håndterer navigation, banner og mobilmenu */
 import Button from "../components/Button.astro";
+
+/* Bruges hvis aktiv navigation senere skal markeres */
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 ---
-<header x-data="{ open: false, showBanner: true }" class="bg-white border-b border-[var(--color-dark-grey)] border-[0.5px]">
-  <!-- Announcement banner (above navbar) - black with close button -->
+
+<header
+  x-data="{ open: false, showBanner: true }"  <!-- Alpine state til mobilmenu og banner -->
+  class="bg-white border-b border-[var(--color-dark-grey)] border-[0.5px]"
+>
+
+  <!-- Banner kan lukkes uden page reload -->
   <div x-show="showBanner" x-transition class="w-full bg-black text-white">
     <div class="container mx-auto px-4 py-2 relative">
-  <p class="body-text text-sm text-center text-white">Join the Organic Thinker's community to start your healing journey</p>
-      <button @click="showBanner = false" aria-label="Close announcement" class="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xl leading-none">×</button>
+      <p class="body-text text-sm text-center text-white">
+        Join the Organic Thinker's community to start your healing journey
+      </p>
+
+      <!-- Lukker banner ved at ændre state -->
+      <button
+        @click="showBanner = false"
+        aria-label="Close announcement"
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xl leading-none">
+        ×
+      </button>
     </div>
   </div>
+
   <div id="navbar" class="flex justify-between items-center w-full h-[64px] px-4">
-    <!-- Logo -->
+
+    <!-- Logo linker altid til forsiden -->
     <div id="logo" class="flex items-center h-full">
-      <a href="/" class="transition-transform duration-200 hover:scale-105 hover:opacity-80">
+      <a href="/">
         <img src="/billeder/logo.png" alt="Logo" class="w-[56px] h-[56px]" />
       </a>
     </div>
 
-    <!-- Desktop Menu -->
-    <nav id="desktopmenu" class="hidden lg:flex flex-1 justify-center items-center h-full relative">
+    <!-- Desktop-navigation skjules på mobil -->
+    <nav id="desktopmenu" class="hidden lg:flex flex-1 justify-center items-center h-full">
       <ul class="flex flex-row gap-[100px] items-center h-full">
-        <li class="flex"><h2 class="body-text hover:underline cursor-pointer">Philosophy</h2></li>
-        <li class="flex"><h2 class="body-text hover:underline cursor-pointer">Stories</h2></li>
-        <li class="flex"><h2 class="body-text hover:underline cursor-pointer">Nutrition</h2></li>
-        <li class="flex"><h2 class="body-text hover:underline cursor-pointer">Activity</h2></li>
-        <li class="flex"><h2 class="body-text hover:underline cursor-pointer">Shop</h2></li>
-        <li class="flex"><h2 class="body-text hover:underline cursor-pointer">Donations</h2></li>
+        <li><h2 class="body-text cursor-pointer">Philosophy</h2></li>
+        <li><h2 class="body-text cursor-pointer">Community</h2></li>
+        <li><h2 class="body-text cursor-pointer">Nutrition</h2></li>
+        <li><h2 class="body-text cursor-pointer">Activity</h2></li>
+        <li><h2 class="body-text cursor-pointer">Shop</h2></li>
+        <li><h2 class="body-text cursor-pointer">Donations</h2></li>
       </ul>
     </nav>
 
-    <!-- Subscribe Button -->
+    <!-- CTA vises kun på desktop -->
     <div class="hidden lg:flex items-center h-full">
       <Button text="Subscribe" href="/subscribe" />
     </div>
 
-    <!-- Hamburger -->
-    <button class="lg:hidden flex flex-col justify-between w-6 h-6" @click="open = !open">
-      <span :class="{'rotate-45 translate-y-2': open}" class="block w-full h-[2px] bg-[var(--color-dark-grey)] transition-transform duration-200"></span>
-      <span :class="{'opacity-0': open}" class="block w-full h-[2px] bg-[var(--color-dark-grey)] transition-opacity duration-200"></span>
-      <span :class="{'-rotate-45 -translate-y-2': open}" class="block w-full h-[2px] bg-[var(--color-dark-grey)] transition-transform duration-200"></span>
+    <!-- Hamburger toggler mobilmenu -->
+    <button
+      class="lg:hidden flex flex-col justify-between w-6 h-6"
+      @click="open = !open"
+    >
+      <span :class="{'rotate-45 translate-y-2': open}" class="block h-[2px] bg-[var(--color-dark-grey)] transition-transform"></span>
+      <span :class="{'opacity-0': open}" class="block h-[2px] bg-[var(--color-dark-grey)] transition-opacity"></span>
+      <span :class="{'-rotate-45 -translate-y-2': open}" class="block h-[2px] bg-[var(--color-dark-grey)] transition-transform"></span>
     </button>
   </div>
 
-<!-- Mobile Menu -->
-<div 
-  x-show="open" 
-  x-transition
-  class="lg:hidden bg-white w-full h-screen overflow-hidden border-b border-[var(--color-dark-grey)] border-[0.5px]"
->
-  <ul class="flex flex-col w-full text-left p-8 space-y-[50px]">
-    <li><h2 class="h2 hover:underline cursor-pointer">Philosophy</h2></li>
-    <li><h2 class="h2 hover:underline cursor-pointer">Stories</h2></li>
-    <li><h2 class="h2 hover:underline cursor-pointer">Nutrition</h2></li>
-    <li><h2 class="h2 hover:underline cursor-pointer">Activity</h2></li>
-    <li><h2 class="h2 hover:underline cursor-pointer">Shop</h2></li>
-    <li><h2 class="h2 hover:underline cursor-pointer">Donations</h2></li>
-  <li><a href="/subscribe" class="h2 underline cursor-pointer">Subscribe</a></li>
-  </ul>
-</div>
+  <!-- Mobilmenu vises kun når open = true -->
+  <div
+    x-show="open"
+    x-transition
+    class="lg:hidden bg-white w-full h-screen overflow-hidden border-b border-[var(--color-dark-grey)] border-[0.5px]"
+  >
+    <ul class="flex flex-col w-full text-left p-8 space-y-[50px]">
+      <li><h2 class="h2 cursor-pointer">Philosophy</h2></li>
+      <li><h2 class="h2 cursor-pointer">Stories</h2></li>
+      <li><h2 class="h2 cursor-pointer">Nutrition</h2></li>
+      <li><h2 class="h2 cursor-pointer">Activity</h2></li>
+      <li><h2 class="h2 cursor-pointer">Shop</h2></li>
+      <li><h2 class="h2 cursor-pointer">Donations</h2></li>
+
+      <!-- CTA gentages i mobilmenu -->
+      <li>
+        <a href="/subscribe" class="h2 underline cursor-pointer">
+          Subscribe
+        </a>
+      </li>
+    </ul>
+  </div>
 
 </header>

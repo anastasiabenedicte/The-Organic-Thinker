@@ -1,26 +1,33 @@
 ---
-// Card: kort med titel, tekst og CTA
+/* Card er en genbrugelig wrapper for titel, tekst og handling */
 import Button from "../components/Button.astro";
 
 const {
-  title = "Philosophy",
+  title = "Philosophy",  // Fallback gør komponenten robust uden props
   body = "Here, you'll find a safe space to share and follow the journeys of others...",
   cta = "Read",
   href = "/",
 } = Astro.props;
 ---
 
+<!-- article bruges fordi kortet er selvstændigt indhold -->
 <article class="max-w-3xl px-6 py-0 md:px-0">
+
+  <!-- header samler titel for korrekt dokumentstruktur -->
   <header>
     <h3 class="h3 mb-8 text-left">{title}</h3>
   </header>
 
+  <!-- Brødtekst rendres direkte fra props -->
   <p class="body-text mb-8">{body}</p>
 
+  <!-- CTA placeres nederst for klar læseretning -->
   <div class="mt-6 flex justify-center">
     <a href={href}>
       <Button text={cta} />
     </a>
   </div>
+
 </article>
+
 
